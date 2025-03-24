@@ -6,7 +6,7 @@ import os
 # -------------------------
 # CONFIGURACIÓN OPENAI API
 # -------------------------
-openai.api_key = st.secrets["OPENAI_API_KEY"]  # Leer desde secrets
+client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # -------------------------
 # TÍTULO Y DESCRIPCIÓN
@@ -20,7 +20,9 @@ Carga tus datos mensuales de transacciones y esquema de bonos, y deja que la IA 
 # INPUTS DEL USUARIO
 # -------------------------
 uploaded_file = st.file_uploader("Carga tu archivo de transacciones (CSV)", type=['csv'])
+
 bono_text = st.text_area("Describe aquí el sistema de bonos y objetivos clave de este mes", height=200)
+
 metrics = st.text_input("¿Cuáles son las métricas clave a mejorar este mes? (separadas por comas)")
 
 # -------------------------
@@ -34,12 +36,8 @@ if uploaded_file and bono_text:
     st.write("Resumen estadístico rápido:")
     st.write(df.describe())
 
-    # -------------------------
-    # ENVÍO A OPENAI (LLM)
-    # -------------------------
     st.subheader("🔎 Análisis Inteligente")
 
-    # Preparar prompt
     prompt = f"""
 Actúa como un analista de incentivos. Aquí está el esquema de bonos:
 
