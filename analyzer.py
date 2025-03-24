@@ -52,7 +52,7 @@ Aquí están los datos de transacciones del mes (columnas: {', '.join(df.columns
 Por favor:
 1. Detecta tendencias importantes (positivas o negativas).
 2. Señala cualquier patrón preocupante.
-3. Sugiere ajustes al sistema de bonos para mejorar las métricas clave.
+3. Sugiere ajustes al sistema de bonos para mejorar las métricas clave. Menciona el tipo de transacciones que mas correlacion tienen con las métricas clave y las cuales podrian impulsar el empuje de estas ultimas.
 4. Lanza cualquier advertencia si es necesario.
 """
 
