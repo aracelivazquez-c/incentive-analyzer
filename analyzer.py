@@ -19,13 +19,8 @@ Carga tus datos mensuales de transacciones y esquema de bonos, y deja que la IA 
 # -------------------------
 # INPUTS DEL USUARIO
 # -------------------------
-# 1. Subir archivo CSV
 uploaded_file = st.file_uploader("Carga tu archivo de transacciones (CSV)", type=['csv'])
-
-# 2. Texto libre: descripción del esquema de bonos
 bono_text = st.text_area("Describe aquí el sistema de bonos y objetivos clave de este mes", height=200)
-
-# 3. Opcional: Métricas clave
 metrics = st.text_input("¿Cuáles son las métricas clave a mejorar este mes? (separadas por comas)")
 
 # -------------------------
@@ -36,7 +31,6 @@ if uploaded_file and bono_text:
     st.subheader("Vista previa de datos")
     st.dataframe(df.head())
 
-    # Procesamiento básico
     st.write("Resumen estadístico rápido:")
     st.write(df.describe())
 
@@ -65,18 +59,15 @@ Por favor:
 """
 
     with st.spinner("Analizando con IA..."):
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3
         )
-        analysis = response['choices'][0]['message']['content']
+        analysis = response.choices[0].message.content
         st.success("¡Análisis completado!")
         st.markdown(analysis)
 
-    # -------------------------
-    # DESCARGAR REPORTE (Opcional)
-    # -------------------------
     st.download_button("Descargar reporte", analysis, file_name="incentive_report.txt")
 
 else:
