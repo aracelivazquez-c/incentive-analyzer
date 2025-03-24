@@ -6,7 +6,7 @@ import os
 # -------------------------
 # CONFIGURACIÓN OPENAI API
 # -------------------------
-openai.api_key = os.getenv("OPENAI_API_KEY")  # Obtener la API Key desde las variables de entorno
+openai.api_key = st.secrets["OPENAI_API_KEY"]  # Leer desde secrets
 
 # -------------------------
 # TÍTULO Y DESCRIPCIÓN
